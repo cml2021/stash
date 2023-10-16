@@ -2,22 +2,26 @@ services:
   server:
     image: node:18
     command: sh -c "npm install && npm start"
-    ports:
-      - '3000:3000'
     working_dir: /api
     volumes:
       - ./:/api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
     environment:
-      POSTGRES_HOST: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
-      POSTGRES_DB: stash-db
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: secret
+      DB_NAME: stash-db
 
   db:
     image: postgres
     volumes:
       - stash-postgres-data://var/lib/postgresql/data
     restart: always
+    ports:
+      - '5432:5432'
     environment:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: stash-db
