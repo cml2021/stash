@@ -6,17 +6,19 @@ Description TBD
 
 ### Requirements
 
-* Node 0.18 or higher 
+* Docker Desktop
 
 ### Installation
 
-TODO npm
+1. Clone the repo
 
-Start the backend server
+2. Start Docker Desktop
 
-```bash
+3. Start API
+
+```shell
 $ cd api
-$ npm start
+$ docker compose up -d
 ```
 
 
