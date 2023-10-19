@@ -1,7 +1,7 @@
 services:
   server:
     image: node:18
-    command: sh -c "npm install && npm start"
+    command: sh -c "npm ci && npm install -g sequelize-cli && npm start"
     working_dir: /api
     volumes:
       - ./:/api

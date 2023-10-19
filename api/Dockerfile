@@ -2,5 +2,6 @@ FROM node:18
 WORKDIR /api
 COPY . .
 RUN npm install
-CMD ["npm", "start"]
+RUN npm install -g sequelize-cli
 EXPOSE 3000
+CMD ["npm", "start"]
