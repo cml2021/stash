@@ -1,8 +1,8 @@
 const express = require('express');
 require('dotenv').config();
 
-const { db, testDatabaseConnection } = require('./models/index');
-const items = require('./routes/items')
+const { testDatabaseConnection } = require('./models/index');
+const items = require('./routes/items');
 
 const app = express();
 const port = process.env.PORT;
@@ -10,8 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Connect to database
-try { 
-  testDatabaseConnection();   
+try {
+  testDatabaseConnection();
 } catch (error) {
   console.log(error);
 }
@@ -24,5 +24,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}...`)
-})
+  console.log(`Server listening on port ${port}...`);
+});

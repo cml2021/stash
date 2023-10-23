@@ -1,40 +1,39 @@
-const express = require('express')
+const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { createItem } = require('../managers/items')
-const { ITEM_TYPES } = require('../constants')
+const { createItem } = require('../managers/items');
+const { ITEM_TYPES } = require('../constants');
 
-const router = express.Router()
+const router = express.Router();
 
 router.post('/', asyncHandler(async (req, res) => {
   const data = req.body;
-  const name = data['name'];
-  const type = data['type'];
+  const { name, type } = data;
 
   /* Validate request params */
-  if (name == null || name == '') {
+  if (name == null || name === '') {
     res.status(400)
-    .send('Item name cannot be empty')
-  } else if (typeof(name) != 'string') {
+      .send('Item name cannot be empty');
+  } else if (typeof (name) !== 'string') {
     res.status(400)
-    .send('Item name must be a string')
+      .send('Item name must be a string');
   } else if (name.length > 255) {
     res.status(400)
-    .send('Item name must be 255 characters or less')
+      .send('Item name must be 255 characters or less');
   } else if (!ITEM_TYPES.includes(type)) {
     res.status(400)
-    .send('Item type not recognized')
+      .send('Item type not recognized');
   }
 
   // /* Create new Item instance */
   const response = await createItem(name, type);
   if (response instanceof Error) {
     res.status(500)
-    .send('Item could not be created')
+      .send('Item could not be created');
   } else {
     res.status(201)
-    .json(response.dataValues)
+      .json(response.dataValues);
   }
-}))
+}));
 
 module.exports = router;
