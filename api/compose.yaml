@@ -26,5 +26,17 @@ services:
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: stash-db
 
+  db-test:
+    image: postgres
+    volumes:
+      - stash-postgres-test-data://var/lib/postgresql/data
+    restart: always
+    ports:
+      - '5430:5432'
+    environment: 
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: stash-db
+
 volumes:
   stash-postgres-data:
+  stash-postgres-test-data:
