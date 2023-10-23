@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 require('dotenv').config();
 
-const { testDatabaseConnection } = require('./config/db');
+const { db, testDatabaseConnection } = require('./models/index');
 const { ITEM_TYPES } = require('./constants')
 const { createItem } = require('./managers/item_manager')
 
@@ -26,7 +26,6 @@ app.post('/items', asyncHandler(async (req, res) => {
   const data = req.body;
   const name = data['name'];
   const type = data['type'];
-  /* TODO: figure out how to recognize when db responds with an error */
 
   /* Validate request params */
   if (name == null || name == '') {
@@ -49,9 +48,8 @@ app.post('/items', asyncHandler(async (req, res) => {
     res.status(500)
     .send('Item could not be created')
   } else {
-    res.body = response;
-    res.status(500)
-    .send(201, 'Item created successfully')
+    res.status(201)
+    .json(response.dataValues)
   }
 }))
 
