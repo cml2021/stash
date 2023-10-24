@@ -14,9 +14,6 @@ router.post('/', asyncHandler(async (req, res) => {
   if (name == null || name === '') {
     res.status(400)
       .send('Item name cannot be empty');
-  } else if (typeof (name) !== 'string') {
-    res.status(400)
-      .send('Item name must be a string');
   } else if (name.length > 255) {
     res.status(400)
       .send('Item name must be 255 characters or less');
