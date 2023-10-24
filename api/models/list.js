@@ -1,40 +1,27 @@
-/* eslint-disable no-unused-vars */
 const { Model } = require('sequelize');
 const { ITEM_TYPES } = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
+  class List extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Item.belongsTo(models.List, {
-        foreignKey: {
-          allowNull: false,
-        },
-      });
+      List.hasMany(models.Item);
     }
   }
-  Item.init({
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-      },
-      comment: 'The item\'s name',
-    },
+  List.init({
     type: {
       type: DataTypes.ENUM,
       values: ITEM_TYPES,
       allowNull: false,
-      comment: 'The item\'s type',
+      comment: 'The type of items in this list',
     },
   }, {
     sequelize,
-    modelName: 'Item',
+    modelName: 'List',
   });
-  return Item;
+  return List;
 };
