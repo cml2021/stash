@@ -1,12 +1,15 @@
-'use strict';
-
+/* eslint-disable global-require */
+/* eslint-disable arrow-parens */
+/* eslint-disable arrow-body-style */
+/* eslint-disable import/no-dynamic-require */
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
+
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/../config/sequelize.js')[env];
+const config = require(`${__dirname}/../config/sequelize.js`)[env];
 const db = {};
 
 let sequelize;
@@ -19,9 +22,9 @@ if (config.use_env_variable) {
 const testDatabaseConnection = async () => {
   try {
     await sequelize.authenticate();
-    console.log("Connection has been established successfully.");
+    console.log('Connection has been established successfully.');
   } catch (error) {
-    console.error("Unable to connect to the database:", error);
+    console.error('Unable to connect to the database:', error);
   }
 };
 
@@ -29,10 +32,10 @@ fs
   .readdirSync(__dirname)
   .filter(file => {
     return (
-      file.indexOf('.') !== 0 &&
-      file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
+      file.indexOf('.') !== 0
+      && file !== basename
+      && file.slice(-3) === '.js'
+      && file.indexOf('.test.js') === -1
     );
   })
   .forEach(file => {

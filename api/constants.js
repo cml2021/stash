@@ -7,7 +7,7 @@ const ITEM_TYPES = [
   'Artist',
   'Book',
   'Article',
-  'Other'
+  'Other',
 ];
 
 module.exports = { ITEM_TYPES };

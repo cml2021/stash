@@ -2,7 +2,7 @@
 const supertest = require('supertest');
 const { app } = require('../../app');
 const { db } = require('../../models/index');
-const { createItem } = require('../items');
+const { createItem } = require('../item_manager');
 
 describe('test the createItem method', () => {
   const testDb = db;

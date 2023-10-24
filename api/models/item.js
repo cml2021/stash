@@ -1,6 +1,6 @@
-'use strict';
+/* eslint-disable no-unused-vars */
 const { Model } = require('sequelize');
-const { ITEM_TYPES } = require('../constants')
+const { ITEM_TYPES } = require('../constants');
 
 module.exports = (sequelize, DataTypes) => {
   class Item extends Model {
@@ -18,16 +18,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
       },
-      comment: 'The item\'s name'
-    }, 
+      comment: 'The item\'s name',
+    },
     type: {
       type: DataTypes.ENUM,
       values: ITEM_TYPES,
       allowNull: false,
-      comment: 'The item\'s type'
-    }
+      comment: 'The item\'s type',
+    },
   }, {
     sequelize,
     modelName: 'Item',

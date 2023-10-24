@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 
-const { createItem } = require('../managers/items');
+const { createItem } = require('../managers/item_manager');
 const { ITEM_TYPES } = require('../constants');
 
 const router = express.Router();
