@@ -1,12 +1,10 @@
 /* eslint-disable no-unused-vars */
-const supertest = require('supertest');
 const { app } = require('../../app');
 const { db } = require('../../models/index');
 const { createItem } = require('../item_manager');
 
 describe('test the createItem method', () => {
   const testDb = db;
-  console.log(testDb);
 
   beforeAll(async () => {
     await testDb.sequelize.sync({ force: true });
