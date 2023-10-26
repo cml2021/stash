@@ -1,14 +1,10 @@
 const { db } = require('../models/index');
-const { findMatchingList } = require('./list_manager');
+const { findOrCreateMatchingList } = require('./list_manager');
 
 async function createItem(itemName, itemType) {
+  // Creates a new item and adds it to the appropriate list
   try {
-    // const listId = findMatchingList(itemType);
-    const list = await db.List.create({
-      type: itemType,
-    });
-
-    const listId = list.dataValues.id;
+    const listId = await findOrCreateMatchingList(itemType);
 
     const item = await db.Item.create({
       name: itemName,
@@ -17,8 +13,8 @@ async function createItem(itemName, itemType) {
     });
     return item;
   } catch (error) {
-    console.log(error);
-    // throw new Error();
+    console.log('Item could not be created', error);
+    return null;
   }
 }
 
