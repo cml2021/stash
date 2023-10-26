@@ -16,7 +16,7 @@ async function findOrCreateMatchingList(itemType) {
     return listId;
   } catch (error) {
     console.log('Matching list could not be found or created', error);
-    return null;
+    return error;
   }
 }
 

@@ -14,7 +14,7 @@ async function createItem(itemName, itemType) {
     return item;
   } catch (error) {
     console.log('Item could not be created', error);
-    return null;
+    return error;
   }
 }
 

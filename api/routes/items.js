@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 
 const { createItem } = require('../managers/item_manager');
 const { ITEM_TYPES } = require('../constants');
+const { InstanceError } = require('sequelize');
 
 const router = express.Router();
 
@@ -24,7 +25,7 @@ router.post('/', asyncHandler(async (req, res) => {
 
   // /* Create new Item instance */
   const response = await createItem(name, type);
-  if (response === null) {
+  if (response instanceof Error) {
     res.status(500)
       .send('Item could not be created');
   } else {
