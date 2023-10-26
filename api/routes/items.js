@@ -24,7 +24,7 @@ router.post('/', asyncHandler(async (req, res) => {
 
   // /* Create new Item instance */
   const response = await createItem(name, type);
-  if (response instanceof Error) {
+  if (response === null) {
     res.status(500)
       .send('Item could not be created');
   } else {
