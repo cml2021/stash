@@ -1,0 +1,44 @@
+services:
+  server:
+    build:
+      context: ./api
+    image: node:18
+    command: sh -c "npm install -g sequelize-cli && npm start"
+    working_dir: /api
+    volumes:
+      - ./api:/api
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: secret
+      DB_NAME: stash-db
+
+  db:
+    image: postgres
+    volumes:
+      - stash-postgres-data://var/lib/postgresql/data
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: stash-db
+
+  db-test:
+    image: postgres
+    volumes:
+      - stash-postgres-test-data://var/lib/postgresql/data
+    restart: always
+    ports:
+      - '5430:5432'
+    environment: 
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: stash-db
+
+volumes:
+  stash-postgres-data:
+  stash-postgres-test-data:
